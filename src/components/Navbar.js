@@ -11,7 +11,7 @@ export default function Navbar() {
   let [open, setOpen] = useState(false);
 
   return (
-    <div className="text-white px-10 py-5 lg:bg-nav bg-navdark lg:flex justify-between lg:items-center">
+    <div className="text-white px-10 lg:py-10 py-5 lg:bg-nav bg-navdark lg:flex justify-between lg:items-center">
       <h1 className="font-bold text-2xl">LLQ</h1>
       <div
         onClick={() => setOpen(!open)}
@@ -37,7 +37,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <button className="bg-[#F4C079] hover:bg-[#da9f4d] text-black lg:text-2xl lg:px-10 px-5 lg:py-2 py-1 rounded-sm font-jonota">
+        <button className="bg-[#F4C079] hover:bg-[#da9f4d] text-black lg:text-xl lg:px-10 px-1 py-1 rounded-sm font-jonota">
           লগিন
         </button>
       </div>
