@@ -1,11 +1,18 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../utils/axios";
 import EngtoBanglaDigit from "../utils/EngToBanglaDigit";
 
 export default function Surah() {
+  //Initialize Variables
+  const navigate = useNavigate();
   let [surahs, setSurahs] = useState([]);
+  const [page, setPage] = useState(1);
+  const [selectedSection, setSelectedSection] = useState("sura");
+  const smallNavStyle = "border-b-4";
 
+  //Getting Surahs First Time
   useEffect(() => {
     async function getSurahs() {
       const result = await axios.get("/surah");
@@ -14,11 +21,24 @@ export default function Surah() {
     getSurahs();
   }, []);
 
-  console.log(surahs);
+  //Functions
+  const handleSmallNav = () => {
+    setSelectedSection((prev) => {
+      if (prev === "sura") {
+        return "para";
+      } else return "sura";
+    });
+  };
+
+  const handleSurahsToShow = () => {
+    setPage((prevPage) => {
+      if (prevPage * 8 < 114) return prevPage + 1;
+    });
+  };
   return (
     <div className="bg-nav p-5">
       {/* SearchBar */}
-      <div className="flex justify-center items-center bg-golden rounded-md lg:w-2/5 w-3/4 mx-auto mt-10">
+      <div className="flex justify-center items-center bg-golden rounded-md lg:w-2/5 w-3/4 mx-auto lg:mt-10">
         <img src="icons/search.svg" alt="search" className="h-6 ml-2 w-6" />
         <input
           className="flex-shrink w-full bg-golden p-2 outline-none mx-auto placeholder-gray-700 font-jonota text-2xl"
@@ -52,23 +72,48 @@ export default function Surah() {
         </div>
       </div>
 
+      {/* Small Navbar */}
+      <div className="flex gap-5 mt-10 p-2 lg:px-48 text-white font-jonota text-xl cursor-pointer">
+        <h1
+          onClick={handleSmallNav}
+          className={selectedSection === "sura" && smallNavStyle}
+        >
+          সুরা সমূহ
+        </h1>
+        <h1
+          onClick={handleSmallNav}
+          className={selectedSection === "para" && smallNavStyle}
+        >
+          পারা
+        </h1>
+      </div>
       {/* All Surahs */}
-      <div className="grid grid-cols-2 p-5 gap-3">
-        {surahs?.map((surah) => {
-          return (
-            <div className="flex items-center gap-5 text-golden border border-golden p-4 rounded font-jonota text-xl">
-              <div className="bg-golden h-8 w-8 rotate-45">
-                <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-black -rotate-45 font-bold">
-                  {EngtoBanglaDigit(surah.number)}
-                </h1>
-              </div>
-              <div>
-                <h1>{surah.name}</h1>
-                <h1>{surah.numberOfAyahs} টি আয়াত</h1>
-              </div>
-            </div>
-          );
-        })}
+      {selectedSection === "sura" ? (
+        <div className="grid grid-cols-2 lg:grid-cols-4 p-2 lg:px-48 gap-3 mt-5">
+          {surahs?.map((surah, index) => {
+            if (index < page * 8) {
+              return (
+                <div
+                  onClick={() => navigate(`/surah/${surah.number}`)}
+                  className="flex items-center gap-5 border border-golden p-4 rounded font-jonota lg:text-xl hover:bg-black transition-all duration-300 cursor-pointer"
+                >
+                  <div className="bg-golden h-8 w-8 rotate-45">
+                    <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-black -rotate-45 font-bold">
+                      {EngtoBanglaDigit(surah.number)}
+                    </h1>
+                  </div>
+                  <div className="text-white">
+                    <h1>{surah.name}</h1>
+                    <h1>{EngtoBanglaDigit(surah.numberOfAyahs)} টি আয়াত</h1>
+                  </div>
+                </div>
+              );
+            }
+          })}
+        </div>
+      ) : null}
+      <div className="text-golden flex justify-center gap-5 underline cursor-pointer">
+        <p onClick={handleSurahsToShow}>See more...</p>
       </div>
     </div>
   );
