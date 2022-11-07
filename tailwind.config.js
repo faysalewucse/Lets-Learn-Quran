@@ -14,6 +14,9 @@ module.exports = {
     fontFamily: {
       jonota: ["Jonota"],
       sandwip: ["Sandwip"],
+      arabic1: ["Arabic1"],
+      arabic2: ["Arabic2"],
+      arabic3: ["Arabic3"],
     },
   },
   plugins: [],

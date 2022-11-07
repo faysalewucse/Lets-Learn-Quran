@@ -13,6 +13,19 @@
   src: url("../public/fonts/ShorifSandwip.ttf");
 }
 
+@font-face {
+  font-family: "Arabic1";
+  src: url("../public/fonts/Al-Qalam-Quran-Majeed.ttf");
+}
+@font-face {
+  font-family: "Arabic2";
+  src: url("../public/fonts/Al-Qalam-Quran.ttf");
+}
+@font-face {
+  font-family: "Arabic3";
+  src: url("../public/fonts/_PDMS_Saleem_QuranFont.ttf");
+}
+
 * {
   margin: 0;
   padding: 0;
