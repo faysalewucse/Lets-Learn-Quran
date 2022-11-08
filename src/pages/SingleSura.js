@@ -10,7 +10,7 @@ export default function SingleSura() {
   const surahNumber = useParams().surahNumber;
 
   //Intitalizing Variables
-  let [surah, setSurah] = useState([]);
+  let [ayahs, setAyahs] = useState([]);
   const [selectedAyah, setSelectedAyah] = useState();
 
   //Initialize Style
@@ -22,17 +22,19 @@ export default function SingleSura() {
 
   useEffect(() => {
     async function getSurah() {
-      const result = await axios.get(`/surah/${surahNumber}`);
-      setSurah(result.data.data);
+      const result = await axios.get(
+        `quran/verses/indopak?chapter_number=${surahNumber}`
+      );
+      setAyahs(result.data.verses);
     }
     getSurah();
-  }, [surahNumber, surah]);
+  }, [surahNumber, ayahs]);
 
   return (
     <div className="flex bg-nav min-h-screen">
       <div className="lg:block hidden text-justify w-2/12 text-3xl font-jonota mt-24 ml-5">
         <h1 className="text-golden text-center px-5">আয়াত নাম্বার</h1>
-        {Array.from(Array(surah?.numberOfAyahs).keys()).map((ayah) => (
+        {Array.from(Array(ayahs?.length).keys()).map((ayah) => (
           <Link
             to={ayah}
             spy={true}
@@ -52,7 +54,7 @@ export default function SingleSura() {
           بِسۡمِ ٱللَّهِ ٱلرَّحۡمَـٰنِ ٱلرَّحِیمِ
         </h1>
         <div className="lg:px-48 p-5">
-          {surah?.ayahs?.map((ayah, index) => (
+          {ayahs?.map((ayah, index) => (
             <p
               key={index}
               id={index}
@@ -60,9 +62,7 @@ export default function SingleSura() {
                 index === selectedAyah && "bg-goldenhover rounded-lg"
               }`}
             >
-              {index === 0
-                ? ayah.text.split("بِسۡمِ ٱللَّهِ ٱلرَّحۡمَـٰنِ ٱلرَّحِیمِ")[1]
-                : ayah.text}
+              {ayah.text_indopak}
               <span className="mx-2 w-10 h-10 font-jonota px-3 rounded-full text-center border border-white">
                 {EngtoBanglaDigit(index + 1)}
               </span>

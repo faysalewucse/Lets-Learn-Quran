@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { banglaName } from "../data/banglaName";
 import axios from "../utils/axios";
 import EngtoBanglaDigit from "../utils/EngToBanglaDigit";
 
@@ -15,8 +16,8 @@ export default function Surah() {
   //Getting Surahs First Time
   useEffect(() => {
     async function getSurahs() {
-      const result = await axios.get("/surah");
-      setSurahs(result.data.data);
+      const result = await axios.get("/chapters?language=en");
+      setSurahs(result.data.chapters);
     }
     getSurahs();
   }, []);
@@ -82,7 +83,7 @@ export default function Surah() {
         </h1>
         <h1
           onClick={handleSmallNav}
-          className={selectedSection === "para" && smallNavStyle}
+          className={selectedSection === "para" ? smallNavStyle : ""}
         >
           পারা
         </h1>
@@ -94,17 +95,21 @@ export default function Surah() {
             if (index < page * 8) {
               return (
                 <div
-                  onClick={() => navigate(`/surah/${surah.number}`)}
-                  className="flex items-center gap-5 border border-golden p-4 rounded font-jonota lg:text-xl hover:bg-black transition-all duration-300 cursor-pointer"
+                  key={index}
+                  onClick={() => navigate(`/surah/${surah.id}`)}
+                  className="flex items-center gap-5 border border-golden p-4 rounded font-jonota lg:text-3xl hover:bg-black transition-all duration-300 cursor-pointer"
                 >
                   <div className="bg-golden h-8 w-8 rotate-45">
                     <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-black -rotate-45 font-bold">
-                      {EngtoBanglaDigit(surah.number)}
+                      {EngtoBanglaDigit(surah.id)}
                     </h1>
                   </div>
                   <div className="text-white">
-                    <h1>{surah.name}</h1>
-                    <h1>{EngtoBanglaDigit(surah.numberOfAyahs)} টি আয়াত</h1>
+                    <h1>
+                      {banglaName[surah.id].name}
+                      {"  "}( {surah.name_arabic} )
+                    </h1>
+                    <h1>{EngtoBanglaDigit(surah.verses_count)} টি আয়াত</h1>
                   </div>
                 </div>
               );
