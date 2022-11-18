@@ -97,10 +97,10 @@ export default function Surah() {
                 <div
                   key={index}
                   onClick={() => navigate(`/surah/${surah.id}`)}
-                  className="flex items-center gap-5 border border-golden p-4 rounded font-jonota lg:text-3xl hover:bg-black transition-all duration-300 cursor-pointer"
+                  className="flex items-center gap-5 border border-golden p-4 rounded font-jonota lg:text-2xl hover:bg-black transition-all duration-300 cursor-pointer"
                 >
                   <div className="bg-golden h-8 w-8 rotate-45">
-                    <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-black -rotate-45 font-bold">
+                    <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-black -rotate-45">
                       {EngtoBanglaDigit(surah.id)}
                     </h1>
                   </div>

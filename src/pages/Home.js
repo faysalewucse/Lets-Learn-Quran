@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Surah from "./Surah";
 
 export default function Home() {
@@ -34,9 +35,12 @@ export default function Home() {
               এটি হতে পারে আপনার জীবন পরিবর্তনের প্রথম ধাপ । আজ এখন থেকেই শুরু
               হয়ে যাক কুরআনের আলোয় আলোকিত হওয়া ।
             </h6>
-            <button className="bg-golden lg:self-start self-center text-black text-2xl lg:px-5 py-2 rounded-sm font-jonota w-1/4 hover:bg-goldenhover">
+            <Link
+              to="/lessons"
+              className="bg-golden lg:self-start self-center text-black text-2xl lg:px-5 py-2 rounded-sm font-jonota w-1/4 hover:bg-goldenhover"
+            >
               শুরু করুণ
-            </button>
+            </Link>
           </div>
         </div>
         <div className="hidden lg:block">
