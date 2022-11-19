@@ -8,7 +8,7 @@ export default function LearnKayda() {
       <div className="grid lg:grid-cols-6 grid-cols-2 lg:gap-10 gap-5">
         {Array.from(Array(30).keys()).map((day) => (
           <Link
-            to={`day/${day + 1}`}
+            to={`/day/${day + 1}`}
             className="border border-golden font-jonota text-white text-3xl p-2 text-center hover:bg-black hover:cursor-pointer rounded-md"
           >
             {EngtoBanglaDigit(day + 1)}

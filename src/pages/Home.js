@@ -37,7 +37,7 @@ export default function Home() {
             </h6>
             <Link
               to="/lessons"
-              className="bg-golden lg:self-start self-center text-black text-2xl lg:px-5 py-2 rounded-sm font-jonota w-1/4 hover:bg-goldenhover"
+              className="bg-golden lg:self-start self-center text-black text-center text-2xl lg:px-5 py-2 rounded-sm font-jonota w-1/4 hover:bg-goldenhover"
             >
               শুরু করুণ
             </Link>
