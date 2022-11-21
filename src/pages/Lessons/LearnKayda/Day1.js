@@ -1,23 +1,31 @@
 import React from "react";
 import { useState } from "react";
-import { arabic_alpha } from "../../../data/arabicHorof";
+import {
+  arabic_alpha,
+  arabic_alpha_bn,
+  arabic_alpha_en,
+} from "../../../data/arabicHorof";
 import { Permutations } from "../../../utils/Permutations";
 
-export default function Day1() {
-  let alif = new Audio("/audios/alif.mp3");
+export default function Day1({ heading, arabic_alphas }) {
   const horof = ["আলিফ", "বা", "তা", "ছা"];
   const [question, setQuestion] = useState(0);
   const [comment, setComment] = useState();
   const [options, setOptions] = useState([0, 1, 2, 3]);
 
-  const play = () => {
-    alif.play();
+  //Function for audio playing
+  const handlePlay = (index) => {
+    new Audio(`/audios/${arabic_alpha_en[index]}.mp3`).play();
   };
+
+  //Chnage Question After Click "আবার"
   const changeQuestionHandler = () => {
     setQuestion(Math.floor(Math.random() * 4));
     setOptions(Permutations([0, 1, 2, 3])[Math.floor(Math.random() * 4)]);
     console.log(options);
   };
+
+  //Function for set Answer Correct and change Question
   function setCorrect() {
     setComment("Correct");
     changeQuestionHandler();
@@ -26,33 +34,30 @@ export default function Day1() {
     }, 1000);
   }
   return (
-    <div className="bg-nav min-h-screen p-12 lg:px-48">
+    <div className="bg-nav min-h-screen p-12 lg:px-96">
       <h1 className="text-white text-3xl font-jonota text-justify">
         আরবি হরফ <span className="text-golden">২৯ টি</span> । ইংরেজীতে যেমন
         Letter ২৬ টি বাঙ্গলায় যেমন ৫০ টি । তেমন আরবি অক্ষর যাকে আমরা{" "}
         <span className="text-golden">হরফ</span> বলি তা হচ্ছে মোট ২৯ টি । ১ম দিন
-        আমরা এর মধ্যে ৪ টি হরফ শিখব ইন শা আল্লাহ।
+        আমরা ১ম ৪ টি হরফ শিখব ইন শা আল্লাহ।
       </h1>
       <div className="grid grid-cols-2 text-white mt-5 gap-5">
-        <div className="text-3xl border border-golden text-center p-2 hover:bg-black hover:cursor-pointer transition-all duration-300">
-          <h1 className="font-arabic1 text-6xl">ب</h1>
-          <h1 className="font-sandwip">বা</h1>
-        </div>
-        <div
-          className="text-3xl border border-golden text-center p-2 hover:bg-black hover:cursor-pointer transition-all duration-300"
-          onClick={play}
-        >
-          <h1 className="font-arabic1 text-6xl">ا</h1>
-          <h1 className="font-sandwip">আলিফ</h1>
-        </div>
-        <div className="text-3xl border border-golden text-center p-2 hover:bg-black hover:cursor-pointer transition-all duration-300">
-          <h1 className="font-arabic1 text-6xl">ث</h1>
-          <h1 className="font-sandwip">ছা</h1>
-        </div>
-        <div className="text-3xl border border-golden text-center p-2 hover:bg-black hover:cursor-pointer transition-all duration-300">
-          <h1 className="font-arabic1 text-6xl">ت</h1>
-          <h1 className="font-sandwip">তা</h1>
-        </div>
+        {Array.from(Array(4).keys())
+          .reverse()
+          .map((index) => {
+            return (
+              <div
+                onClick={() => handlePlay(index)}
+                className="relative text-3xl border border-golden text-center p-2 hover:bg-black hover:cursor-pointer transition-all duration-300"
+              >
+                <span className="absolute top-1 left-1 text-sm bg-goldenhover p-2 rounded">
+                  {index + 1}
+                </span>
+                <h1 className="font-arabic1 text-6xl">{arabic_alpha[index]}</h1>
+                <h1 className="font-sandwip">{arabic_alpha_bn[index]}</h1>
+              </div>
+            );
+          })}
       </div>
       <h1 className="text-white text-3xl font-jonota text-justify mt-5">
         এখানে প্রত্যেক হরফের নিচে <span className="text-golden">বাংলা </span>

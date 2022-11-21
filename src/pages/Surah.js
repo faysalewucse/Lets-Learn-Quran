@@ -114,6 +114,7 @@ export default function Surah() {
                 </div>
               );
             }
+            return null;
           })}
         </div>
       ) : null}
