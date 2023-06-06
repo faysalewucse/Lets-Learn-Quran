@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
   font-family: "Jonota";
   src: url("../public/fonts/ShorifJonota.ttf");
@@ -30,4 +29,23 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* For Firefox support */
+.custom-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
 }

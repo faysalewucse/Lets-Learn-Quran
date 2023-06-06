@@ -16,7 +16,7 @@ export default function Home() {
         </h1>
         <div className="flex lg:justify-center flex-col lg:flex-row self-center items-center lg:gap-56 gap-10 mb-20 lg:-mt-20">
           <div className="relative lg:w-1/3">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2  bg-[#F4C079] filter blur-3xl rounded-full opacity-50"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4  bg-[#F4C079] filter blur-3xl rounded-full opacity-50"></div>
             <img
               className="hidden lg:block lg:absolute w-1/2 opacity-25 lg:bottom-0 lg:left-0"
               src="images/arabicLetter.png"

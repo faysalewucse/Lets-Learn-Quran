@@ -5,6 +5,7 @@ import {
   arabic_alpha_bn,
   arabic_alpha_en,
 } from "../../../data/arabicHorof";
+import EngtoBanglaDigit from "../../../utils/EngToBanglaDigit";
 import { Permutations } from "../../../utils/Permutations";
 
 export default function Day1({ heading, arabic_alphas }) {
@@ -41,7 +42,7 @@ export default function Day1({ heading, arabic_alphas }) {
         <span className="text-golden">হরফ</span> বলি তা হচ্ছে মোট ২৯ টি । ১ম দিন
         আমরা ১ম ৪ টি হরফ শিখব ইন শা আল্লাহ।
       </h1>
-      <div className="grid grid-cols-2 text-white mt-5 gap-5">
+      <div className="grid grid-cols-4 text-white mt-5 gap-5">
         {Array.from(Array(4).keys())
           .reverse()
           .map((index) => {
@@ -50,11 +51,15 @@ export default function Day1({ heading, arabic_alphas }) {
                 onClick={() => handlePlay(index)}
                 className="relative text-3xl border border-golden text-center p-2 hover:bg-black hover:cursor-pointer transition-all duration-300"
               >
-                <span className="absolute top-1 left-1 text-sm bg-goldenhover p-2 rounded">
-                  {index + 1}
+                <span className="absolute -top-1 -left-1 text-sm text-black font-bold bg-white p-2 rounded">
+                  {EngtoBanglaDigit(index + 1)}
                 </span>
-                <h1 className="font-arabic1 text-6xl">{arabic_alpha[index]}</h1>
-                <h1 className="font-sandwip">{arabic_alpha_bn[index]}</h1>
+                <h1 className="font-arabic1 text-4xl lg:text-6xl">
+                  {arabic_alpha[index]}
+                </h1>
+                <h1 className="font-sandwip text-xl lg:text-4xl">
+                  {arabic_alpha_bn[index]}
+                </h1>
               </div>
             );
           })}
@@ -69,7 +74,7 @@ export default function Day1({ heading, arabic_alphas }) {
       <h1 className="text-golden text-center font-sandwip text-4xl my-10">
         মজা করে হরফ শিখী
       </h1>
-      <div className="border border-golden text-center">
+      <div className="border border-golden rounded text-center">
         <h1 className="text-white font-jonota text-3xl mt-5">
           কোনটি {horof[question]}?
         </h1>
@@ -101,7 +106,7 @@ export default function Day1({ heading, arabic_alphas }) {
 
         <div
           onClick={changeQuestionHandler}
-          className="font-jonota  text-2xl bg-white hover:cursor-pointer mt-10 hover:bg-slate-200"
+          className="font-jonota  text-2xl m-2 rounded bg-white hover:cursor-pointer mt-10 hover:bg-slate-200"
         >
           আবার
         </div>
